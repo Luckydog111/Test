@@ -1,0 +1,31 @@
+Задание 2
+
+Students
+StudentId FirstName LastName Group
+
+Exams
+StudentId ExamName Result
+
+а) 
+SELECT Students.FirstName, Students.LastName
+FROM Students INNER JOIN Exams
+ON Students.StudentId = Exams.StudentId
+WHERE Exams.Result < 3
+GROUP BY Students.StudentId, Students.FirstName, Students.LastName
+HAVING COUNT(Students.StudentId) > 2;
+
+б) 
+SELECT Students.Group
+FROM Students INNER JOIN Exams
+ON Students.StudentId = Exams.StudentId
+WHERE Students.StudentId IN (
+	SELECT Students.StudentId
+	FROM Students INNER JOIN Exams
+	ON Students.StudentId = Exams.StudentId
+	WHERE Exams.Result < 3
+	GROUP BY Students.StudentId
+	HAVING COUNT(Students.StudentId) > 2
+	)
+GROUP BY Students.Group
+HAVING COUNT(DISTINCT Students.StudentId > 10);
+

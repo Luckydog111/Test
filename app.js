@@ -1,5 +1,5 @@
 class AClass {
-    numbers =[];
+    numbers = [];
     countNumber = 0;
 
     constructor(countNumber) {
